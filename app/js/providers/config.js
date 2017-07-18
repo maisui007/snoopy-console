@@ -1,13 +1,11 @@
-(function(angualr){
+(function(angular){
     'use strict';
-    angualr.module('snoopyConsole').provider('consoleConfig',function(){
+    angular.module('snoopyConsole').provider('consoleConfig',function(){
         var values = {
             appName : 'snoopy-console-default',
             defaultLang :'en',
-
             loginUrl: '/snoop/login/',
-
-            templatesPath:'app/template'
+            templatesPath:'app/templates'
         };
 
         return {
