@@ -60,6 +60,9 @@ dependencies {
     compile (group: 'org.webjars', name: 'angular-translate', version: '2.13.1') { exclude (group:"org.webjars",module:"angularjs") }
     compile group: 'org.webjars.bower', name: 'ng-file-upload', version: '12.2.13'
     compile group: 'org.webjars.bower', name: 'tether', version: '1.4.0'
+    // https://mvnrepository.com/artifact/org.webjars.bower/angular-resource
+    compile group: 'org.webjars.bower', name: 'angular-resource', version: '1.6.5'
+
     provided ("org.apache.tomcat.embed:tomcat-embed-jasper")
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
