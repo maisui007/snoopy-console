@@ -1,12 +1,10 @@
 (function(angular){
     'use strict';
-    var appConsole = angular.module('snoopyConsole');
-    appConsole.directive('snoopyConsole',['consoleConfig',function(consoleConfig){
-        return{
-            restrict:'EA',
-            templateUrl:consoleConfig.templatesPath+'login.html'
+    angular.module('snoopyConsole').directive('snoopyMain',function(){
+        return {
+            restrict: 'EA',
+            //template : '<h1>自定义指令!</h1>'
+            templateUrl:'app/templates/login.html'
         }
-    }]);
-
-
+    });
 })(angular);

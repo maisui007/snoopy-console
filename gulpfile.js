@@ -48,7 +48,9 @@ gulp.task('cache-templates', function () {
 
 gulp.task('concat-uglify-js', ['cache-templates'], function() {
     return gulp.src([
-        src + 'js/*/*.js'
+        src + 'js/route/app.route.js',
+        src + 'js/*/*.js',
+        dst + '/' + jsFile
     ])
         .pipe(concat(jsFile))
         .pipe(gulp.dest(dst))
