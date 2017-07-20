@@ -10,12 +10,15 @@ var concat = require('gulp-concat');
 var eslint = require('gulp-eslint');
 var del = require('del');
 var path = require('path');
+var imagemin = require('gulp-imagemin');//图片压缩
+var  pngcrush = require('imagemin-pngcrush');
+
 
 
 // Vars
 var src = 'app/';
 var dst = 'src/main/resources/static/dist/';
-var tplPath = src+'templates'; //must be same as fileManagerConfig.tplPath
+var tplPath = src+'tpl'; //must be same as fileManagerConfig.tplPath
 var jsFile = 'console.all.js';
 var jsMinFile = 'console.all.min.js';
 var cssFile = 'console.all.css';
@@ -31,13 +34,14 @@ gulp.task('clean', function (cb) {
  * 将html模板页面 以angularjs的方式 压缩并缓存
  * */
 gulp.task('cache-templates', function () {
-    return gulp.src(tplPath+'/*.html')
+    return gulp.src([tplPath+'/*/*.html'
+        ,tplPath +'/*.html'])
         //templateHTML.js为压缩之后的文件名，注意.js后缀名不能少
         .pipe(templateCache(jsFile,{
             //路径的前缀
             //root: 'templates/wap/',
             //模块的名字
-            module:"snoopyConsole",
+            module:"app",
             base: function(file) {
                 return tplPath + '/' + path.basename(file.history.toString());
             }
@@ -46,9 +50,28 @@ gulp.task('cache-templates', function () {
 });
 
 
+// 压缩图片
+gulp.task('img', function () {
+    var imgOption = {
+        optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
+        progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+        interlaced: true, //类型：Boolean 默认：false 隔行扫描gif进行渲染
+        multipass: true, //类型：Boolean 默认：false 多次优化svg直到完全优化
+        svgoPlugins: [{removeViewBox: false}],//不要移除svg的viewbox属性
+        use: [pngcrush()] //使用pngquant深度压缩png图片的imagemin插件
+    };
+    return gulp.src('app/img/**/*')
+        .pipe(imagemin(imgOption))
+        .pipe(gulp.dest('./dist/img/'))
+        .pipe(notify({message: 'img task ok'}));
+});
+
+
 gulp.task('concat-uglify-js', ['cache-templates'], function() {
     return gulp.src([
-        src + 'js/route/app.route.js',
+        src + 'js/app.js',
+        src + 'js/*.js',
+        src + 'app/*/*.js',
         src + 'js/*/*.js',
         dst + '/' + jsFile
     ])
@@ -87,4 +110,4 @@ gulp.task('minify-css', function() {
 //        .pipe(gulp.dest(dst));
 //});
 
-gulp.task('default', ['concat-uglify-js', 'minify-css']);
+gulp.task('default', ['concat-uglify-js', 'minify-css','img']);
