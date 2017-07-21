@@ -2,9 +2,9 @@ module.exports = {
 	min: {
       files: [{
           expand: true,
-          cwd: 'src/tpl/',
+          cwd: 'snoopy/tpl/',
           src: ['*.html', '**/*.html'],
-          dest: 'dist/tpl/',
+          dest: 'src/main/resources/static/dist/tpl/',
           ext: '.html',
           extDot: 'first'
       }]

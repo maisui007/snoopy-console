@@ -1,8 +1,8 @@
 module.exports = {
 	app: {
         files: {
-          'src/css/app.css': [
-            'src/css/less/app.less'
+          'snoopy/css/app.css': [
+            'snoopy/css/less/app.less'
           ]
         },
         options: {
@@ -11,9 +11,9 @@ module.exports = {
     },
     min: {
         files: {
-            'dist/css/app.min.css': [
-                'src/css/bootstrap.css',
-                'src/css/*.css'
+            'src/main/resources/static/dist/css/app.min.css': [
+                'snoopy/css/bootstrap.css',
+                'snoopy/css/*.css'
             ]
         },
         options: {

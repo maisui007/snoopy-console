@@ -1,8 +1,8 @@
 module.exports = {
   dist:{
     src:[
-      'dist/js/dist.js'
+      'src/main/resources/static/dist/js/dist.js'
     ],
-    dest:'dist/js/app.min.js'
+    dest:'src/main/resources/static/dist/js/app.min.js'
   }
 }
